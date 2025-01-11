@@ -1,3 +1,4 @@
+--Exercise 1 Database Introduction
 --Task 1
 CREATE DATABASE [Minions]
 
