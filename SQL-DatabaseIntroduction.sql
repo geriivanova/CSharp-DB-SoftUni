@@ -37,3 +37,7 @@ VALUES
 
 --Task 5
 TRUNCATE TABLE [Minions]
+
+--Task 6
+DROP TABLE [Minions]
+DROP TABLE [Towns]
