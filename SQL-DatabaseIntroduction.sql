@@ -63,3 +63,18 @@ VALUES
 (3, 'Mariq Petrova Stancheva', NULL, 1.67, 50, 'f', GETDATE(), 'Teacher'),
 (4, 'Anna Stoyanova Petrova', NULL, 1.70, 68, 'f', GETDATE(), 'Athlete'),
 (5, 'Stefan Stefanov Georgiev', NULL, 1.77, 81, 'm', GETDATE(), 'Developer')
+
+
+--Task 8
+CREATE TABLE [Users](
+	[Id] BIGINT PRIMARY KEY IDENTITY NOT NULL,
+	[Username] VARCHAR(30) UNIQUE NOT NULL,
+	[Password] VARCHAR(30) UNIQUE NOT NULL,
+	[ProfilePicture] VARBINARY(MAX),
+	[LastLoginTime] DATETIME2,
+	[IsDeleted] BIT
+)
+
+INSERT INTO [Users](
+	
+)
