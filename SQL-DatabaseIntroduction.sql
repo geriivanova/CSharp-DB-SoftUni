@@ -41,3 +41,24 @@ TRUNCATE TABLE [Minions]
 --Task 6
 DROP TABLE [Minions]
 DROP TABLE [Towns]
+
+--Task 7
+CREATE TABLE [People](
+	[Id] INT PRIMARY KEY NOT NULL,
+	[Name] NVARCHAR(200) NOT NULL,
+	[Picture] VARBINARY(MAX),
+	[Height] DECIMAL(16, 2),
+	[Weight] DECIMAL(16, 2),
+	[Gender] CHAR(1) NOT NULL,
+	[Birthdate] DATETIME2 NOT NULL,
+	[Biography] NVARCHAR(MAX)
+)
+
+INSERT INTO [People]([Id], [Name], [Picture], 
+[Height], [Weight], [Gender], [Birthdate], [Biography])
+VALUES 
+(1, 'Ivan Ivanov Ivanov', NULL, 1.65, 65, 'm', GETDATE(), 'Student at university'),
+(2, 'Georgi Georgiev Ivanov', NULL, 1.77, 81, 'm', GETDATE(), 'Developer'),
+(3, 'Mariq Petrova Stancheva', NULL, 1.67, 50, 'f', GETDATE(), 'Teacher'),
+(4, 'Anna Stoyanova Petrova', NULL, 1.70, 68, 'f', GETDATE(), 'Athlete'),
+(5, 'Stefan Stefanov Georgiev', NULL, 1.77, 81, 'm', GETDATE(), 'Developer')
