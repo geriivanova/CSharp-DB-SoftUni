@@ -36,3 +36,4 @@ VALUES
 (3,	'Steward', NULL, 2)
 
 --Task 5
+TRUNCATE TABLE [Minions]
