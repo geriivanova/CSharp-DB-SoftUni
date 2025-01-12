@@ -82,3 +82,12 @@ VALUES
 ('anna8', '123aa', NULL, GETDATE(), 'false'),
 ('pe6o4', 'pesho56', NULL, GETDATE(), 'true'),
 ('raliii33', 'ralii4567', NULL, GETDATE(), 'false')
+
+
+--Task 9
+ALTER TABLE [Users]
+DROP CONSTRAINT PK__Users__3214EC0770BF330C
+
+ALTER TABLE [Users]
+ADD CONSTRAINT [PK_Composite_ID_Username]
+PRIMARY KEY ([Id], [Username])
