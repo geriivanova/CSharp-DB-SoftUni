@@ -143,3 +143,49 @@ CREATE TABLE [Movies](
 	[Rating] VARCHAR(20), 
 	[Notes] VARCHAR(200)
 )
+
+INSERT INTO [Directors]([Id], [DirectorName], [Notes])
+VALUES
+(1, 'David Fincher', 'American film director'),
+(2, 'Steven Spielberg', 'A major figure of the New Hollywood era'),
+(3, 'David Fincher', 'Paul Thomas Anderson'),
+(4, 'Ridley Scott', 'English film director and producer'),
+(5, 'John Ford', 'American film director and producer')
+
+
+/*
+UPDATE [Directors]
+SET [DirectorName] = 'Paul Thomas Anderson' 
+WHERE [Id]=3
+
+UPDATE [Directors]
+SET [Notes] = 'American filmmaker' 
+WHERE [Id]=3
+*/
+
+
+INSERT INTO [Genres]([Id], [GenreName], [Notes])
+VALUES
+(1, 'Drama', NULL),
+(2, 'Comedy', NULL),
+(3, 'Fantasy', NULL),
+(4, 'Horror', NULL),
+(5, 'Action', NULL)
+
+
+INSERT INTO [Categories]([Id], [CategoryName], [Notes])
+VALUES
+(1, 'Drama', NULL),
+(2, 'Comedy', NULL),
+(3, 'Fantasy', NULL),
+(4, 'Horror', NULL),
+(5, 'Action', NULL)
+
+INSERT INTO [Movies]([Id], [Title], [DirectorId], [CopyrightYear], 
+	[Length], [GenreId], [CategoryId], [Rating], [Notes])
+VALUES 
+(1, 'The Godfather', 1 , '1972', '2 h 55 min', 1, 1, NULL, NULL),
+(2, 'The Lord of the Rings: The Fellowship of the Ring', 2 , '2001', ' 2 h 58 min', 2, 2, NULL, NULL),
+(3, '12 Angry Men', 3 , '1957', '1 h 36 min', 3, 3, NULL, NULL),
+(4, 'Avatar', 4 , '2009', '2 h 42 min', 4, 4, NULL, NULL),
+(5, 'The Matrix', 5 , '1999', '2 h 16 min', 5, 5, NULL, NULL)
