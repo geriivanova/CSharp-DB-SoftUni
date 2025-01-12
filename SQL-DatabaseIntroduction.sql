@@ -251,4 +251,3 @@ CREATE TABLE [RentalOrders] (
 	[OrderStatus] VARCHAR(50), 
 	[Notes] VARCHAR(100)
 )
-
