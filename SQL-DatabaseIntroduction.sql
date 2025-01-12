@@ -91,3 +91,11 @@ DROP CONSTRAINT PK__Users__3214EC0770BF330C
 ALTER TABLE [Users]
 ADD CONSTRAINT [PK_Composite_ID_Username]
 PRIMARY KEY ([Id], [Username])
+
+--Task 10
+ALTER TABLE [Users]
+ADD CONSTRAINT [Check_Password]
+CHECK (LEN([Password])>=5)
+
+
+
