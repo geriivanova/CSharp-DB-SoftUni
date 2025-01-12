@@ -109,3 +109,37 @@ DROP CONSTRAINT PK_Composite_ID_Username
 ALTER TABLE [Users]
 ADD CONSTRAINT [PK_ID]
 PRIMARY KEY ([Id])
+
+--Task 13
+CREATE DATABASE [Movies]
+USE [Movies]
+
+CREATE TABLE [Directors](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[DirectorName] VARCHAR(50) NOT NULL, 
+	[Notes] VARCHAR(200)
+)
+
+CREATE TABLE [Genres](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[GenreName] VARCHAR(50) NOT NULL,
+	[Notes] VARCHAR(200)
+)
+
+CREATE TABLE [Categories](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[CategoryName] VARCHAR(50) NOT NULL,
+	[Notes] VARCHAR(200)
+)
+
+CREATE TABLE [Movies](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[Title] VARCHAR(50) NOT NULL, 
+	[DirectorId] INT FOREIGN KEY REFERENCES [Directors]([Id]), 
+	[CopyrightYear] CHAR(4) NOT NULL, 
+	[Length] VARCHAR(20) NOT NULL, 
+	[GenreId] INT FOREIGN KEY REFERENCES [Genres]([Id]), 
+	[CategoryId] INT FOREIGN KEY REFERENCES [Categories]([Id]),
+	[Rating] VARCHAR(20), 
+	[Notes] VARCHAR(200)
+)
