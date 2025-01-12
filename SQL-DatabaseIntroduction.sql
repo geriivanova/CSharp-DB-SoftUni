@@ -102,3 +102,10 @@ ALTER TABLE [Users]
 ADD CONSTRAINT [Default_Value_for_Date]
 DEFAULT GETDATE() FOR [LastLoginTime]
 
+--Task 12
+ALTER TABLE [Users]
+DROP CONSTRAINT PK_Composite_ID_Username
+
+ALTER TABLE [Users]
+ADD CONSTRAINT [PK_ID]
+PRIMARY KEY ([Id])
