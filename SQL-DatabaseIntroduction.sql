@@ -97,5 +97,8 @@ ALTER TABLE [Users]
 ADD CONSTRAINT [Check_Password]
 CHECK (LEN([Password])>=5)
 
-
+--Task 11
+ALTER TABLE [Users]
+ADD CONSTRAINT [Default_Value_for_Date]
+DEFAULT GETDATE() FOR [LastLoginTime]
 
