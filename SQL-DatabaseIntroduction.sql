@@ -75,6 +75,10 @@ CREATE TABLE [Users](
 	[IsDeleted] BIT
 )
 
-INSERT INTO [Users](
-	
-)
+INSERT INTO [Users]([Username], [Password], [ProfilePicture], [LastLoginTime], [IsDeleted])
+VALUES
+('ivanovv2', '123I456', NULL, GETDATE(), 'false'),
+('ivanovaaa3', '123abv4', NULL, GETDATE(), 'true'),
+('anna8', '123aa', NULL, GETDATE(), 'false'),
+('pe6o4', 'pesho56', NULL, GETDATE(), 'true'),
+('raliii33', 'ralii4567', NULL, GETDATE(), 'false')
