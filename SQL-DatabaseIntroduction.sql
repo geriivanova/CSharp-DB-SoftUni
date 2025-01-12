@@ -189,3 +189,66 @@ VALUES
 (3, '12 Angry Men', 3 , '1957', '1 h 36 min', 3, 3, NULL, NULL),
 (4, 'Avatar', 4 , '2009', '2 h 42 min', 4, 4, NULL, NULL),
 (5, 'The Matrix', 5 , '1999', '2 h 16 min', 5, 5, NULL, NULL)
+
+--Task 14
+CREATE DATABASE [CarRental]
+USE [CarRental]
+
+CREATE TABLE [Categories](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[CategoryName] VARCHAR(100) NOT NULL,
+	[DailyRate]	INT, 
+	[WeeklyRate] INT,
+	[MonthlyRate] INT, 
+	[WeekendRate] INT
+)
+
+CREATE TABLE [Cars] (
+	[Id] INT PRIMARY KEY NOT NULL,
+	[PlateNumber] VARCHAR(10) NOT NULL, 
+	[Manufacturer] VARCHAR(100) NOT NULL, 
+	[Model] VARCHAR(100) NOT NULL, 
+	[CarYear] CHAR(4) NOT NULL, 
+	[CategoryId] INT FOREIGN KEY REFERENCES [Categories]([Id]),  
+	[Doors] TINYINT, 
+	[Picture] VARBINARY(MAX), 
+	[Condition] VARCHAR(100), 
+	[Available] BIT
+)
+
+CREATE TABLE [Employees] (
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[FirstName] VARCHAR(50) NOT NULL, 
+	[LastName] VARCHAR(50) NOT NULL,
+	[Title] VARCHAR(50) NOT NULL,
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [Customers] (
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[DriverLicenceNumber] CHAR(9) NOT NULL, 
+	[FullName] VARCHAR(200) NOT NULL, 
+	[Address] VARCHAR(100),
+	[City] VARCHAR(100), 
+	[ZIPCode] CHAR(4), 
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [RentalOrders] (
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[EmployeeId] INT FOREIGN KEY REFERENCES [Employees]([Id]),
+	[CustomerId] INT FOREIGN KEY REFERENCES [Customers]([Id]),
+	[CarId] INT FOREIGN KEY REFERENCES [Cars]([Id]), 
+	[TankLevel] INT, 
+	[KilometrageStart] INT, 
+	[KilometrageEnd] INT, 
+	[TotalKilometrage] INT,
+	[StartDate] DATETIME2, 
+	[EndDate] DATETIME2, 
+	[TotalDays] SMALLINT,
+	[RateApplied] VARCHAR(15),
+	[TaxRate] VARCHAR(15), 
+	[OrderStatus] VARCHAR(50), 
+	[Notes] VARCHAR(100)
+)
+
