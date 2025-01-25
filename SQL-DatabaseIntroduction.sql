@@ -357,6 +357,57 @@ CREATE TABLE [Occupancies](
 	[Notes] VARCHAR(100)
 )
 
+INSERT INTO	[Employees] ([Id], [FirstName], [LastName], [Title], [Notes] )
+VALUES 
+(1, 'Anna', 'Petrova', 'CEO', NULL),
+(2, 'Sofi', 'Ivanova', 'Web Developer', NULL),
+(3, 'Petar', 'Petrov', 'Vet', NULL)
+
+INSERT INTO [Customers]([Id], [AccountNumber], [LastName], 
+[PhoneNumber], [EmergencyName], [EmergencyNumber], [Notes])
+VALUES 
+(1, '1234567', 'IVANOVA', '1214567451', NULL, NULL, NULL),
+(2, '1837563', 'PETROVA', '1239567897', NULL, NULL, NULL),
+(3, '9234548', 'STOYANOVA', '1234577896', NULL, NULL, NULL)
+
+INSERT INTO [RoomStatus] ([RoomStatus], [Notes])
+VALUES 
+(1, NULL),
+(2, NULL),
+(3, NULL)
+
+INSERT INTO [RoomTypes] ([RoomType], [Notes])
+VALUES 
+(1, NULL),
+(2, NULL),
+(3, NULL)
+
+INSERT INTO [BedTypes] ([BedType], [Notes])
+VALUES 
+(1, NULL),
+(2, NULL),
+(3, NULL)
+
+INSERT INTO [Rooms]([RoomNumber], [RoomType], [BedType], [Rate], [RoomStatus], [Notes])
+VALUES 
+(1, 1, 1, '5 STARS', 1, NULL),
+(2, 2, 2, '5 STARS', 2,  NULL),
+(3, 3, 3, '5 STARS', 3,  NULL)
+
+INSERT INTO [Payments]([Id], [EmployeeId], [PaymentDate], [AccountNumber], [FirstDateOccupied], 
+	[LastDateOccupied], [TotalDays], [AmountCharged], [TaxRate], [TaxAmount], [PaymentTotal], [Notes])
+VALUES 
+(1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+
+INSERT INTO [Occupancies]([Id], [EmployeeId], [DateOccupied], [AccountNumber], [RoomNumber], 
+	[RateApplied], [PhoneCharge], [Notes])
+VALUES 
+(1, 1, NULL, NULL, 1, NULL, NULL, NULL),
+(2, 2, NULL, NULL, 2, NULL, NULL, NULL),
+(3, 3, NULL, NULL, 3, NULL, NULL, NULL)
+
 --Task 19
 USE SoftUni
 
