@@ -386,3 +386,9 @@ UPDATE Employees
 
 SELECT [Salary] FROM Employees
 
+--Task 23
+USE Hotel
+
+UPDATE [Payments]
+	SET [TaxRate] = [TaxRate] - [TaxRate]*0.03
+SELECT [TaxRate] FROM [Payments]
