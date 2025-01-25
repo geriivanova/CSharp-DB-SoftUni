@@ -251,3 +251,37 @@ CREATE TABLE [RentalOrders] (
 	[OrderStatus] VARCHAR(50), 
 	[Notes] VARCHAR(100)
 )
+
+INSERT INTO [Categories]([Id], [CategoryName], [DailyRate], [WeeklyRate], [MonthlyRate], [WeekendRate]) 
+VALUES 
+(1, 'Car', 10, 70, 310, 20),
+(2, 'Bus', 20, 140, 620, 40),
+(3, 'Truck', 30, 210, 930, 60)
+
+INSERT INTO [Cars] ([Id], [PlateNumber], [Manufacturer], 
+[Model], [CarYear], [CategoryId], [Doors], [Picture], [Condition], [Available])
+VALUES 
+(1, 'H 7293 BH', 'OPEL', 'CORSA', '2011', 2, 4, NULL, NULL, NULL),
+(2, 'BH 7583 BA', 'VW', 'GOLF', '2001', 1, 2, NULL, NULL, NULL),
+(3, 'A 1785 KA', 'TOYOTA', 'COROLLA', '2025', 3, 4, NULL, NULL, NULL)
+
+INSERT INTO [Employees]([Id], [FirstName], [LastName], [Title], [Notes])
+VALUES 
+(1, 'Ana', 'Ivanova', 'CEO', NULL),
+(2, 'Ivan', 'Petrov', 'Web Developer', NULL),
+(3, 'Sisa', 'Stoyanova', 'Vet', NULL)
+
+INSERT INTO [Customers] ([Id], [DriverLicenceNumber], [FullName], [Address], [City], [ZIPCode], [Notes])
+VALUES
+(1, '203245789', 'Jane Haris', 'Knqz Boris 2', 'Varna', '9000', NULL),
+(2, '903247789', 'Anna Stoicheva', 'Marica 22', 'Shumen', '9700', NULL),
+(3, '273245139', 'Sava Savov', 'Ruja Teneva 12', 'Sofia', '1789', NULL)
+
+INSERT INTO [RentalOrders] ([Id], [EmployeeId], [CustomerId], [CarId], [TankLevel], [KilometrageStart],
+[KilometrageEnd], [TotalKilometrage], [StartDate], [EndDate], [TotalDays], [RateApplied], [TaxRate],
+[OrderStatus], [Notes]) 
+VALUES 
+(1, 1, 1, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 2, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 3, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
+
