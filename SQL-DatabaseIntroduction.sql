@@ -285,3 +285,89 @@ VALUES
 (2, 2, 2, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3, 3, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL)
 
+--Task 15
+CREATE DATABASE Hotel
+USE Hotel
+
+CREATE TABLE [Employees] (
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[FirstName] VARCHAR(100) NOT NULL, 
+	[LastName] VARCHAR(100) NOT NULL, 
+	[Title] VARCHAR(100), 
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [Customers](
+	[Id] INT PRIMARY KEY NOT NULL,
+	[AccountNumber] CHAR(10),
+	[LastName] VARCHAR(100) NOT NULL, 
+	[PhoneNumber] CHAR(10), 
+	[EmergencyName] VARCHAR(50),
+	[EmergencyNumber] CHAR(10), 
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [RoomStatus] (
+	[RoomStatus] INT PRIMARY KEY NOT NULL,
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [RoomTypes] (
+	[RoomType] INT PRIMARY KEY NOT NULL,
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [BedTypes] (
+	[BedType] INT PRIMARY KEY NOT NULL,
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [Rooms](
+	[RoomNumber] INT PRIMARY KEY NOT NULL,
+	[RoomType] INT FOREIGN KEY REFERENCES [RoomTypes]([RoomType]),
+	[BedType] INT FOREIGN KEY REFERENCES [BedTypes]([BedType]),
+	[Rate] CHAR(7),
+	[RoomStatus] INT FOREIGN KEY REFERENCES [RoomStatus]([RoomStatus]),
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [Payments](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[EmployeeId] INT FOREIGN KEY REFERENCES[Employees]([Id]), 
+	[PaymentDate] DATETIME2, 
+	[AccountNumber] CHAR(10), 
+	[FirstDateOccupied] DATETIME2, 
+	[LastDateOccupied] DATETIME2, 
+	[TotalDays] INT, 
+	[AmountCharged] INT , 
+	[TaxRate] INT, 
+	[TaxAmount] INT,
+	[PaymentTotal] MONEY,
+	[Notes] VARCHAR(100)
+)
+
+CREATE TABLE [Occupancies](
+	[Id] INT PRIMARY KEY NOT NULL, 
+	[EmployeeId] INT FOREIGN KEY REFERENCES[Employees]([Id]), 
+	[DateOccupied] DATETIME2, 
+	[AccountNumber] CHAR(10), 
+	[RoomNumber] INT FOREIGN KEY REFERENCES[Rooms]([RoomNumber]), 
+	[RateApplied] VARCHAR(50),  
+	[PhoneCharge] VARCHAR(50), 
+	[Notes] VARCHAR(100)
+)
+
+--Task 19
+USE SoftUni
+
+SELECT * FROM Towns
+SELECT * FROM Departments
+SELECT * FROM Employees
+
+--Task 20
+SELECT * FROM Towns
+ORDER BY [Name] ASC
+SELECT * FROM Departments
+ORDER BY [Name] ASC
+SELECT * FROM Employees
+ORDER BY [Salary] DESC
