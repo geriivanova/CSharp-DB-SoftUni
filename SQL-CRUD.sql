@@ -13,3 +13,9 @@ SELECT [FirstName],
 	   [LastName],
 	   [Salary]
   FROM [Employees]
+
+--Task 5
+SELECT [FirstName],
+	   [MiddleName],
+	   [LastName]
+  FROM [Employees] 
