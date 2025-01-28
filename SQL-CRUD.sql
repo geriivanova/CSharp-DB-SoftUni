@@ -81,3 +81,13 @@ ORDER BY [Salary] DESC,
          [FirstName] ASC,
 		 [LastName] DESC,
 		 [MiddleName] ASC
+
+--Task 16
+CREATE 
+  VIEW [V_EmployeesSalaries]
+         AS (
+			SELECT [FirstName],
+				   [LastName],
+	               [Salary]
+			  FROM [Employees]
+		     )
