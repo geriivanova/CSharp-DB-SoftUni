@@ -73,3 +73,11 @@ SELECT [FirstName],
 	   [LastName]
   FROM [Employees]
  WHERE [DepartmentID] != 4
+
+--Task 15
+  SELECT *
+    FROM [Employees]
+ORDER BY [Salary] DESC,
+         [FirstName] ASC,
+		 [LastName] DESC,
+		 [MiddleName] ASC
