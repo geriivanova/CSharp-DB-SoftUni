@@ -102,3 +102,7 @@ CREATE
 				       AS [Job Title]
 			  FROM [Employees]
 		     )
+
+--Task 18
+SELECT DISTINCT [JobTitle]
+           FROM [Employees]
