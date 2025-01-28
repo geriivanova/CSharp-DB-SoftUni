@@ -7,3 +7,9 @@ SELECT *
 --Task 3
 SELECT [Name]
   FROM [Departments]
+
+--Task 4
+SELECT [FirstName],
+	   [LastName],
+	   [Salary]
+  FROM [Employees]
