@@ -4,3 +4,6 @@ USE [SoftUni]
 SELECT * 
   FROM [Departments]
 
+--Task 3
+SELECT [Name]
+  FROM [Departments]
