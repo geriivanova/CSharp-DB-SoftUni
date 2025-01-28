@@ -119,4 +119,15 @@ SELECT TOP (7) [FirstName],
 			   [HireDate]
       FROM [Employees]
   ORDER BY [HireDate] DESC
-	  
+
+--Task 21
+
+SELECT * FROM Departments
+	
+UPDATE [Employees]
+   SET [Salary] += [Salary]*0.12
+ WHERE [DepartmentID] IN (1, 2, 4, 11)
+
+ SELECT [Salary]
+   FROM [Employees]
+ 
