@@ -131,3 +131,10 @@ UPDATE [Employees]
  SELECT [Salary]
    FROM [Employees]
  
+
+ USE Geography
+
+ --Task 22
+  SELECT [PeakName]
+    FROM [Peaks]
+ORDER BY [PeakName] ASC
