@@ -157,3 +157,10 @@ ORDER BY [PeakName] ASC
 	  AS [Currency]
     FROM [Countries]
 ORDER BY [CountryName]
+
+USE Diablo
+
+--Task 25
+  SELECT [Name]
+    FROM [Characters]
+ORDER BY [Name] ASC
