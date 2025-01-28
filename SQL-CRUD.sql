@@ -24,3 +24,8 @@ SELECT [FirstName],
 SELECT [FirstName] + '.' + [LastName] + '@softuni.bg'
 	AS [Full Email Address]
   FROM [Employees]
+
+--Task 7
+SELECT DISTINCT [Salary]
+			 AS [Salary]
+           FROM [Employees]
