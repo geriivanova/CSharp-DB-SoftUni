@@ -29,3 +29,8 @@ SELECT [FirstName] + '.' + [LastName] + '@softuni.bg'
 SELECT DISTINCT [Salary]
 			 AS [Salary]
            FROM [Employees]
+
+--Task 8
+SELECT * 
+  FROM [Employees]
+ WHERE [JobTitle] = 'Sales Representative'
