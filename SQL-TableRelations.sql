@@ -122,3 +122,13 @@ INSERT INTO [Teachers]
 			(104, 'Ted', 105),
 			(105, 'Mark', 105),
 			(106, 'Greta', 101)
+
+--Task 5
+
+--Task 9*
+USE Geography
+  SELECT M.[MountainRange], P.[PeakName], P.[Elevation]
+    FROM [Mountains] AS M JOIN [Peaks] AS P 
+      ON M.Id = P.MountainId
+   WHERE M.[MountainRange] = 'Rila'
+ORDER BY P.[Elevation] DESC
