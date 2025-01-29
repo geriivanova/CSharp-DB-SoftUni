@@ -124,6 +124,42 @@ INSERT INTO [Teachers]
 			(106, 'Greta', 101)
 
 --Task 5
+CREATE DATABASE [Online Store]
+USE [Online Store]
+
+CREATE TABLE [ItemTypes](
+	[ItemTypeID] INT PRIMARY KEY,
+	[Name] VARCHAR(64)
+)
+
+CREATE TABLE [Items](
+	[ItemID] INT PRIMARY KEY,
+	[Name] VARCHAR(64),
+	[ItemTypeID] INT FOREIGN KEY REFERENCES [ItemTypes]([ItemTypeID])
+)
+
+CREATE TABLE [Cities](
+	[CityID] INT PRIMARY KEY,
+	[Name] VARCHAR(64)
+)
+
+CREATE TABLE [Customers](
+	[CustomerID] INT PRIMARY KEY,
+	[Name] VARCHAR(64),
+	[Birthday] DATETIME2,
+	[CityID] INT FOREIGN KEY REFERENCES [Cities]([CityID])
+)
+
+CREATE TABLE [Orders](
+	[OrderID] INT PRIMARY KEY,
+	[CustomerID] INT FOREIGN KEY REFERENCES [Customers]([CustomerID])
+)
+
+CREATE TABLE [OrderItems](
+	[OrderID] INT FOREIGN KEY REFERENCES [Orders]([OrderID]),
+	[ItemID] INT FOREIGN KEY REFERENCES [Items]([ItemID])
+	CONSTRAINT PK_Order_Items PRIMARY KEY ([OrderID], [ItemID])
+)
 
 --Task 9*
 USE Geography
