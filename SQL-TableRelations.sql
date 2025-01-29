@@ -161,6 +161,40 @@ CREATE TABLE [OrderItems](
 	CONSTRAINT PK_Order_Items PRIMARY KEY ([OrderID], [ItemID])
 )
 
+--Task 6
+CREATE DATABASE [University]
+USE [University]
+
+CREATE TABLE [Majors](
+	[MajorID] INT PRIMARY KEY,
+	[Name] VARCHAR(64)
+)
+
+CREATE TABLE [Students](
+	[StudentID] INT PRIMARY KEY,
+	[StudentNumber] VARCHAR(10),
+	[StudentName] VARCHAR(64),
+	[MajorID] INT FOREIGN KEY REFERENCES [Majors]([MajorID])
+)
+
+CREATE TABLE [Subjects](
+	[SubjectID] INT PRIMARY KEY,
+	[SubjectName] VARCHAR(64)
+)
+
+CREATE TABLE [Agenda](
+	[StudentID] INT FOREIGN KEY REFERENCES [Students]([StudentID]),
+	[SubjectID] INT FOREIGN KEY REFERENCES [Subjects]([SubjectID]),
+	CONSTRAINT PK_StudentID_SubjectID PRIMARY KEY ([StudentID],[SubjectID])
+)
+
+CREATE TABLE [Payments](
+	[PaymentaID] INT PRIMARY KEY,
+	[PaymentDate] DATETIME2,
+	[PaymentAmount] INT,
+	[StudentID] INT FOREIGN KEY REFERENCES [Students]([StudentID])
+)
+
 --Task 9*
 USE Geography
   SELECT M.[MountainRange], P.[PeakName], P.[Elevation]
