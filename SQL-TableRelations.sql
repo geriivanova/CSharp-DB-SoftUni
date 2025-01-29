@@ -74,3 +74,36 @@ INSERT INTO [Models]
 			(104, 'Model X', 2),
 			(105, 'Model 3', 2),
 			(106, 'Nova', 3)
+
+--Task 3
+CREATE TABLE [Students](
+	[StudentID] INT PRIMARY KEY,
+	[Name] VARCHAR(64) NOT NULL,
+)
+
+CREATE TABLE [Exams](
+	[ExamID] INT PRIMARY KEY,
+	[Name] VARCHAR(64) NOT NULL,
+)
+
+CREATE TABLE [StudentsExams](
+	[StudentID] INT FOREIGN KEY REFERENCES [Students]([StudentID]),
+	[ExamID] INT FOREIGN KEY REFERENCES [Exams]([ExamID]),
+	CONSTRAINT [PK_Students_Exams] PRIMARY KEY ([StudentID], [ExamID])
+)
+
+INSERT INTO [Students]
+     VALUES (1, 'Mila'),
+	        (2, 'Toni'),
+			(3, 'Ron')
+
+INSERT INTO [Exams]
+     VALUES (101, 'SpringMVC'),
+	        (102, 'Neo4j'),
+			(103, 'Oracle 11g')
+
+INSERT INTO [StudentsExams]
+     VALUES (1, 101),
+	        (1, 102),
+			(2, 101),
+			(3, 103)
