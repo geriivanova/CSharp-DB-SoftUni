@@ -78,12 +78,12 @@ INSERT INTO [Models]
 --Task 3
 CREATE TABLE [Students](
 	[StudentID] INT PRIMARY KEY,
-	[Name] VARCHAR(64) NOT NULL,
+	[Name] VARCHAR(64) NOT NULL
 )
 
 CREATE TABLE [Exams](
 	[ExamID] INT PRIMARY KEY,
-	[Name] VARCHAR(64) NOT NULL,
+	[Name] VARCHAR(64) NOT NULL
 )
 
 CREATE TABLE [StudentsExams](
@@ -107,3 +107,18 @@ INSERT INTO [StudentsExams]
 	        (1, 102),
 			(2, 101),
 			(3, 103)
+
+--Task 4
+CREATE TABLE [Teachers](
+	[TeacherID] INT PRIMARY KEY,
+	[Name] VARCHAR(64),
+	[ManagerID] INT FOREIGN KEY REFERENCES [Teachers]([TeacherID])
+)
+
+INSERT INTO [Teachers]
+     VALUES (101, 'John', NULL),
+	        (102, 'Maya', 106),
+			(103, 'Silvia', 106),
+			(104, 'Ted', 105),
+			(105, 'Mark', 105),
+			(106, 'Greta', 101)
