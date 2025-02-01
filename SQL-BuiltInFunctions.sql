@@ -127,3 +127,10 @@ SELECT [Username],
   FROM [Users]
 ORDER BY [Email Provider],
          [Username]
+
+--Task 16
+  SELECT [Username],
+         [IpAddress] AS [IP Address] 
+    FROM [Users]
+   WHERE [IpAddress] LIKE '___.1%.%.___'
+ORDER BY [Username]
