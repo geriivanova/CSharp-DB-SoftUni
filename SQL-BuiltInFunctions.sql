@@ -85,3 +85,14 @@ ORDER BY [Salary] DESC
          ) AS [D]
    WHERE [Rank] = 2
 ORDER BY [Salary] DESC
+
+--Task 12
+USE [Geography]
+
+  SELECT [CountryName] 
+      AS [Country Name],
+	     [IsoCode] 
+	  AS [ISO Code]
+    FROM [Countries]
+   WHERE [CountryName] LIKE '%a%a%a%'
+ORDER BY [IsoCode]
