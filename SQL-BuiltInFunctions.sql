@@ -134,3 +134,23 @@ ORDER BY [Email Provider],
     FROM [Users]
    WHERE [IpAddress] LIKE '___.1%.%.___'
 ORDER BY [Username]
+
+--Task 17
+SELECT *  FROM Games
+
+   SELECT [Name] AS [Game],
+	   CASE 
+           WHEN DATEPART(HH, [Start]) BETWEEN 0 AND 11 THEN 'Morning'
+		   WHEN DATEPART(HH, [Start]) BETWEEN 12 AND 17 THEN 'Afternoon'
+		   ELSE 'Evening'
+       END AS [Part of the Day],
+	   CASE 
+           WHEN [Duration] <=3 THEN 'Extra Short'
+		   WHEN [Duration] BETWEEN 4 AND 6 THEN 'Short'
+		   WHEN [Duration] >6 THEN 'Long'
+		   ELSE 'Extra Long'
+       END AS [Duration]
+    FROM [Games]
+ORDER BY [Name] ASC,
+         [Duration] ASC,
+		 [Part of the Day] ASC
