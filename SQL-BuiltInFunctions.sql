@@ -96,3 +96,13 @@ USE [Geography]
     FROM [Countries]
    WHERE [CountryName] LIKE '%a%a%a%'
 ORDER BY [IsoCode]
+
+--Task 13
+  SELECT [P].[PeakName],
+         [R].[RiverName],
+	     LOWER((LEFT([PeakName], LEN([PeakName]) - 1)) + [RiverName])
+	  AS [Mix]
+    FROM [Peaks] AS [P] 
+    JOIN [Rivers] AS [R]
+      ON RIGHT([PeakName], 1) = LEFT([RiverName], 1)
+ORDER BY [Mix]
