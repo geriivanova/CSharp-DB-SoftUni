@@ -106,3 +106,16 @@ ORDER BY [IsoCode]
     JOIN [Rivers] AS [R]
       ON RIGHT([PeakName], 1) = LEFT([RiverName], 1)
 ORDER BY [Mix]
+
+--Task 14
+USE [Diablo]
+
+  SELECT 
+  TOP 50 [Name],
+         FORMAT([Start], 'yyyy-MM-dd') 
+	  AS [Start]
+    FROM [Games]
+   WHERE DATEPART(YEAR, [Start]) IN (2011, 2012)
+ORDER BY [Start],
+         [Name]
+    
