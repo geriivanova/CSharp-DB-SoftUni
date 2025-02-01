@@ -118,4 +118,12 @@ USE [Diablo]
    WHERE DATEPART(YEAR, [Start]) IN (2011, 2012)
 ORDER BY [Start],
          [Name]
-    
+  
+  
+--Task 15
+SELECT [Username],
+       RIGHT([Email], LEN([Email]) - (CHARINDEX('@', [Email])))
+    AS [Email Provider]
+  FROM [Users]
+ORDER BY [Email Provider],
+         [Username]
