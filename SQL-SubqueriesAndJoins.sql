@@ -205,3 +205,15 @@ SELECT [ContinentCode],
 	  AS [CurrencyRankingTempTable]
    WHERE [CurrencyRakn] = 1 
 ORDER BY [ContinentCode]
+
+--Task 16
+   SELECT COUNT(DISTINCT [C].[CountryCode]) AS [Count]
+     FROM [Countries] 
+	   AS [C]
+LEFT JOIN [MountainsCountries] 
+       AS [MC]
+       ON [C].[CountryCode] = [MC].[CountryCode]
+LEFT JOIN [Mountains] 
+       AS [M]
+       ON [MC].[MountainId] = [M].[Id]
+    WHERE [M].[Id] IS NULL
