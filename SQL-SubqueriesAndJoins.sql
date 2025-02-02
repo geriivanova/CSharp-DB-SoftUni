@@ -121,3 +121,10 @@ LEFT JOIN [Employees] AS [M]
 LEFT JOIN [Departments] AS [D]
        ON [D].[DepartmentID] = [E].[DepartmentID]
  ORDER BY [E].[EmployeeID] ASC
+
+--Task 11 - First solution 
+  SELECT 
+ TOP (1) AVG([Salary])
+    FROM [Employees] 
+GROUP BY [DepartmentID]
+ORDER BY 1
