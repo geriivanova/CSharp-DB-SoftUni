@@ -57,3 +57,15 @@ LEFT JOIN [EmployeesProjects] AS [EP]
        ON [E].[EmployeeID] = [EP].[EmployeeID]
 	WHERE [EP].[ProjectID] IS NULL
  ORDER BY [E].[EmployeeID] ASC
+
+--Task 6
+    SELECT [E].[FirstName],
+	       [E].[LastName],
+		   [E].[HireDate],
+		   [D].[Name] AS [DeptName]
+      FROM [Employees] AS [E]
+INNER JOIN [Departments] AS [D]
+        ON [E].[DepartmentID] = [D].[DepartmentID]
+     WHERE [E].[HireDate] > '1999-01-01'
+	   AND [D].[Name] IN ('Sales', 'Finance')
+  ORDER BY [E].[HireDate] ASC
