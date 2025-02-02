@@ -124,7 +124,9 @@ LEFT JOIN [Departments] AS [D]
 
 --Task 11 - First solution 
   SELECT 
- TOP (1) AVG([Salary])
+ TOP (1) AVG([Salary]) AS [MinAverageSalary]
     FROM [Employees] 
 GROUP BY [DepartmentID]
 ORDER BY 1
+
+--Task 11 - Second solution 
