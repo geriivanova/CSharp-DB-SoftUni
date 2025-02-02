@@ -36,3 +36,14 @@ INNER JOIN [Departments] AS [D]
      WHERE [D].[Name] = 'Sales'
   ORDER BY [E].[EmployeeID] ASC
 
+--Task 4
+    SELECT 
+    TOP(5) [E].[EmployeeID],
+	       [E].[FirstName],
+		   [E].[Salary],
+		   [D].[Name] AS [DepartmentName]
+      FROM [Employees] AS [E]
+INNER JOIN [Departments] AS [D]
+        ON [E].[DepartmentID] = [D].[DepartmentID]
+	 WHERE [E].[Salary] > 15000
+  ORDER BY [D].[DepartmentID] ASC
