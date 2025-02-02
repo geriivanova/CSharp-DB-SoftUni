@@ -47,3 +47,13 @@ INNER JOIN [Departments] AS [D]
         ON [E].[DepartmentID] = [D].[DepartmentID]
 	 WHERE [E].[Salary] > 15000
   ORDER BY [D].[DepartmentID] ASC
+
+--Task 5
+   SELECT 
+  TOP (3) [E].[EmployeeID],
+          [E].[FirstName]
+     FROM [Employees] AS [E]
+LEFT JOIN [EmployeesProjects] AS [EP]
+       ON [E].[EmployeeID] = [EP].[EmployeeID]
+	WHERE [EP].[ProjectID] IS NULL
+ ORDER BY [E].[EmployeeID] ASC
