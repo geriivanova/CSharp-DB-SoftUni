@@ -83,3 +83,17 @@ LEFT JOIN [Projects] AS [P]
     WHERE [P].[StartDate] > '2002-08-13' 
 	  AND [P].[EndDate] IS NULL
  ORDER BY [E].[EmployeeID] ASC
+
+--Task 8
+   SELECT [E].[EmployeeID],
+          [E].[FirstName],
+		  CASE
+		      WHEN DATEPART(YEAR, [P].[StartDate]) >= 2005 THEN NULL
+			  ELSE [P].[Name]
+		  END AS [ProjectName]
+     FROM [Employees] AS [E]
+LEFT JOIN [EmployeesProjects] AS [EP]
+       ON [E].[EmployeeID] = [EP].[EmployeeID]
+LEFT JOIN [Projects] AS [P]
+       ON [EP].[ProjectID] = [P].[ProjectID]
+    WHERE [E].[EmployeeID] = 24
