@@ -179,3 +179,29 @@ LEFT JOIN [Continents] AS [CONT]
        ON [C].[ContinentCode] = [CONT].[ContinentCode]
     WHERE [Cont].[ContinentName] = 'Africa'
 ORDER BY [C].[CountryName] ASC
+
+
+--Task 15
+SELECT [ContinentCode],
+       [CurrencyCode],
+	   [CurrencyUsage]
+  FROM(
+        SELECT *,
+               DENSE_RANK() OVER(PARTITION BY [ContinentCode] ORDER BY [CurrencyUsage] DESC) 
+	        AS [CurrencyRakn]
+       FROM(
+             SELECT [CONT].[ContinentCode],
+                    [C].[CurrencyCode],
+		            COUNT([C].[CurrencyCode]) AS [CurrencyUsage]
+               FROM [Continents] AS [CONT]
+          LEFT JOIN [Countries] AS [C]
+                 ON [C].[ContinentCode] = [CONT].[ContinentCode]
+           GROUP BY [CONT].[ContinentCode],
+                    [C].[CurrencyCode]
+             HAVING COUNT([C].[CurrencyCode]) > 1
+            ) 
+			AS [CurrencyUsageTempTable]
+      ) 
+	  AS [CurrencyRankingTempTable]
+   WHERE [CurrencyRakn] = 1 
+ORDER BY [ContinentCode]
