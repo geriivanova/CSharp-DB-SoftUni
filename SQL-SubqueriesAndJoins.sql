@@ -69,3 +69,17 @@ INNER JOIN [Departments] AS [D]
      WHERE [E].[HireDate] > '1999-01-01'
 	   AND [D].[Name] IN ('Sales', 'Finance')
   ORDER BY [E].[HireDate] ASC
+
+--Task 7
+   SELECT 
+  TOP (5) [E].[EmployeeID],
+          [E].[FirstName],
+		  [P].[Name] AS [ProjectName]
+     FROM [Employees] AS [E]
+LEFT JOIN [EmployeesProjects] AS [EP]
+       ON [E].[EmployeeID] = [EP].[EmployeeID]
+LEFT JOIN [Projects] AS [P]
+       ON [EP].[ProjectID] = [P].[ProjectID]
+    WHERE [P].[StartDate] > '2002-08-13' 
+	  AND [P].[EndDate] IS NULL
+ ORDER BY [E].[EmployeeID] ASC
