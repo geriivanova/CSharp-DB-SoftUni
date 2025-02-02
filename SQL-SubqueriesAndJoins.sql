@@ -130,3 +130,11 @@ GROUP BY [DepartmentID]
 ORDER BY 1
 
 --Task 11 - Second solution 
+SELECT MIN([MAS].[MinAverageSalary]) AS [MinAverageSalary]
+  FROM
+      (
+         SELECT 
+            AVG([Salary]) AS [MinAverageSalary]
+           FROM [Employees] 
+       GROUP BY [DepartmentID]
+      ) AS [MAS]
