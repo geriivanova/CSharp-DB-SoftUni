@@ -108,3 +108,16 @@ LEFT JOIN [Projects] AS [P]
         ON [M].[EmployeeID] = [E].[ManagerID]
      WHERE [E].[ManagerID] IN (3, 7)
   ORDER BY [E].[EmployeeID] ASC
+
+--Task 10 
+   SELECT 
+ TOP (50) [E].[EmployeeID],
+          CONCAT_WS(' ', [E].[FirstName], [E].[LastName]) AS [EmployeeName],
+		  CONCAT_WS(' ', [M].[FirstName], [M].[LastName]) AS [ManagerName],
+		  [D].[Name] AS [DepartmentName]
+     FROM [Employees] AS [E]
+LEFT JOIN [Employees] AS [M]
+       ON [M].[EmployeeID] = [E].[ManagerID]
+LEFT JOIN [Departments] AS [D]
+       ON [D].[DepartmentID] = [E].[DepartmentID]
+ ORDER BY [E].[EmployeeID] ASC
