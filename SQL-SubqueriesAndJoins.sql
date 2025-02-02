@@ -97,3 +97,14 @@ LEFT JOIN [EmployeesProjects] AS [EP]
 LEFT JOIN [Projects] AS [P]
        ON [EP].[ProjectID] = [P].[ProjectID]
     WHERE [E].[EmployeeID] = 24
+
+--Task 9
+    SELECT [E].[EmployeeID],
+	       [E].[FirstName],
+		   [E].[ManagerID],
+		   [M].[FirstName] AS [ManagerName]
+      FROM [Employees] AS [E]
+ LEFT JOIN [Employees] AS [M]
+        ON [M].[EmployeeID] = [E].[ManagerID]
+     WHERE [E].[ManagerID] IN (3, 7)
+  ORDER BY [E].[EmployeeID] ASC
