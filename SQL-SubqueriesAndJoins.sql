@@ -238,3 +238,29 @@ LEFT JOIN [Peaks] AS [P]
  ORDER BY [HighestPeakElevation] DESC, 
           [LongestRiverLength] DESC, 
           [C].[CountryName] ASC
+
+--Task 18
+   SELECT 
+   TOP(5) [CountryName] AS [Country],
+          ISNULL([PeakName], '(no highest peak)') AS [Highest Peak Name],
+          ISNULL([Elevation], 0) AS [Highest Peak Elevation],
+		  ISNULL([MountainRange], '(no mountain)') AS [Mountain] 
+    FROM(
+          SELECT [C].[CountryName],
+                 [P].[PeakName],
+                 [P].[Elevation],
+		         [M].[MountainRange],
+		         DENSE_RANK() OVER(PARTITION BY [C].[CountryName] ORDER BY [P].[Elevation] DESC)
+              AS [PeakRank]
+            FROM [Countries] AS [C]
+       LEFT JOIN [MountainsCountries] AS [MC] 
+              ON [C].[CountryCode] = [MC].[CountryCode]
+       LEFT JOIN [Mountains] AS [M] 
+              ON [MC].[MountainId] = [M].[Id]
+       LEFT JOIN [Peaks] AS [P]
+              ON [P].[MountainId] = [M].[Id]
+        ) 
+	  AS [RankingTempTable]
+   WHERE [PeakRank] = 1
+ORDER BY [Country],
+         [Highest Peak Name]
