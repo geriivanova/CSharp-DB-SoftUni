@@ -9,3 +9,10 @@ SELECT COUNT([Id])
 SELECT MAX([MagicWandSize])
     AS [LongestMagicWand]
   FROM [WizzardDeposits]
+
+--Task 3
+  SELECT [DepositGroup],
+         MAX([MagicWandSize])
+      AS [LongestMagicWand]
+    FROM [WizzardDeposits]
+GROUP BY [DepositGroup]
