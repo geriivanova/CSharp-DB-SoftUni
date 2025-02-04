@@ -16,3 +16,11 @@ SELECT MAX([MagicWandSize])
       AS [LongestMagicWand]
     FROM [WizzardDeposits]
 GROUP BY [DepositGroup]
+
+--Task 4
+  SELECT 
+  TOP(2) [DepositGroup]
+      AS [LongestMagicWand]
+    FROM [WizzardDeposits]
+GROUP BY [DepositGroup]
+ORDER BY AVG([MagicWandSize]) ASC
