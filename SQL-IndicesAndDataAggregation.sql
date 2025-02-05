@@ -217,3 +217,20 @@ GROUP BY [DepartmentID]
    WHERE [SalaryRank]= 3
 GROUP BY [DepartmentID],
          [Salary]
+
+--Task 19
+SELECT 
+     TOP (10)
+         [E1].[FirstName],
+         [E1].[LastName],
+         [E1].[DepartmentID]
+    FROM [Employees]
+      AS [E1]
+   WHERE [E1].[Salary] > (
+                           SELECT AVG([E2].[Salary])
+                               AS [AvgSalary]
+                             FROM [Employees]
+                               AS [E2]
+                            WHERE [E2].[DepartmentID] = [E1].[DepartmentID]
+                         )
+ORDER BY [E1].[DepartmentID] ASC
