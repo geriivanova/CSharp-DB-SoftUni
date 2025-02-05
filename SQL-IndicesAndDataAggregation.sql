@@ -187,3 +187,11 @@ UPDATE [EmployeesTempTable]
       AS [AverageSalary]
     FROM [EmployeesTempTable]
 GROUP BY [DepartmentID]
+
+--Task 16
+  SELECT [DepartmentID],
+	     MAX([Salary])
+	  AS [MaxSalary]
+    FROM [Employees]
+GROUP BY [DepartmentID]
+  HAVING MAX([Salary]) NOT BETWEEN 30000 AND 70000
