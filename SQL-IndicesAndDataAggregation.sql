@@ -81,3 +81,10 @@ ORDER BY [MagicWandCreator] ASC,
          ) 
       AS [AgeGroupTempTable]
 GROUP BY [AgeGroup]
+
+--Task 10 - 1st solution 
+  SELECT 
+DISTINCT LEFT([FirstName], 1) 
+      AS [FirstLetter]
+    FROM [WizzardDeposits]
+ORDER BY [FirstLetter]
