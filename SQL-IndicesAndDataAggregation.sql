@@ -90,3 +90,10 @@ DISTINCT LEFT([FirstName], 1)
    WHERE [DepositGroup] = 'Troll Chest'
 ORDER BY [FirstLetter]
 
+--Task 10 - 2nd solution
+  SELECT LEFT([FirstName], 1) 
+      AS [FirstLetter]
+    FROM [WizzardDeposits]
+   WHERE [DepositGroup] = 'Troll Chest'
+GROUP BY LEFT([FirstName], 1)
+ORDER BY [FirstLetter]
