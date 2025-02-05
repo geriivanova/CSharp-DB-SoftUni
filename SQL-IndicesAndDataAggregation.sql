@@ -195,3 +195,10 @@ GROUP BY [DepartmentID]
     FROM [Employees]
 GROUP BY [DepartmentID]
   HAVING MAX([Salary]) NOT BETWEEN 30000 AND 70000
+
+--Task 17
+  SELECT COUNT([EmployeeID])
+      AS [Count]
+    FROM [Employees]
+   WHERE [ManagerID] IS NULL
+GROUP BY [ManagerID]
