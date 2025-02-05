@@ -167,3 +167,23 @@ ORDER BY [DepartmentID]
    WHERE [DepartmentID] IN (2, 5, 7) 
      AND [HireDate] > '2000-01-01'
 GROUP BY [DepartmentID]
+
+--Task 15
+SELECT *
+  INTO [EmployeesTempTable]
+  FROM [Employees]
+ WHERE [Salary] > 30000
+
+DELETE 
+  FROM [EmployeesTempTable]
+ WHERE [ManagerID] = 42
+
+UPDATE [EmployeesTempTable]
+   SET [Salary] += 5000
+ WHERE [DepartmentID] = 1
+
+  SELECT [DepartmentID],
+         AVG([Salary])
+      AS [AverageSalary]
+    FROM [EmployeesTempTable]
+GROUP BY [DepartmentID]
