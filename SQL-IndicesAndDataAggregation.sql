@@ -109,3 +109,24 @@ GROUP BY [DepositGroup],
 	     [IsDepositExpired]
 ORDER BY [DepositGroup] DESC,
          [IsDepositExpired] ASC
+
+--Task 12
+SELECT SUM([Difference]) 
+    AS [SumDifference]
+  FROM (
+SELECT [W1].[FirstName]
+    AS [Host Wizard],
+       [W1].[DepositAmount]
+    AS [Host Wizard Deposit],
+	   [W2].[FirstName]
+    AS [Guest Wizard],
+       [W2].[DepositAmount]
+    AS [Guest Wizard Deposit],
+	   ([W1].[DepositAmount] - [W2].[DepositAmount])
+    AS [Difference]
+  FROM [WizzardDeposits] AS [W1]
+  JOIN [WizzardDeposits] AS [W2]
+    ON [W2].[Id] = [W1].[Id] + 1 
+
+	) 
+	AS [DepositAmountTempTable]
