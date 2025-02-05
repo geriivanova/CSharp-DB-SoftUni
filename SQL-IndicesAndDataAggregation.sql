@@ -201,3 +201,19 @@ GROUP BY [DepartmentID]
       AS [Count]
     FROM [Employees]
    WHERE [ManagerID] IS NULL
+
+--Task 18
+ SELECT [DepartmentID],
+        [Salary] 
+	 AS [ThirdHighestSalary]
+   FROM (
+             SELECT [DepartmentID],
+                    [Salary],
+			        DENSE_RANK() OVER(PARTITION BY [DepartmentID] ORDER BY [Salary] DESC)
+	             AS [SalaryRank]
+               FROM [Employees]
+         )
+      AS [TempTable]
+   WHERE [SalaryRank]= 3
+GROUP BY [DepartmentID],
+         [Salary]
