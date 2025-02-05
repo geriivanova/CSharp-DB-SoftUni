@@ -110,7 +110,7 @@ GROUP BY [DepositGroup],
 ORDER BY [DepositGroup] DESC,
          [IsDepositExpired] ASC
 
---Task 12
+--Task 12 - 1st solution
 SELECT SUM([Difference]) 
     AS [SumDifference]
   FROM (
@@ -128,5 +128,23 @@ SELECT [W1].[FirstName]
   JOIN [WizzardDeposits] AS [W2]
     ON [W2].[Id] = [W1].[Id] + 1 
 
+	) 
+	AS [DepositAmountTempTable]
+
+--Task 12 - 2nd solution
+SELECT SUM([Difference]) 
+    AS [SumDifference]
+  FROM (
+SELECT [FirstName]
+    AS [Host Wizard],
+       [DepositAmount]
+    AS [Host Wizard Deposit],
+	   LEAD([FirstName]) OVER(ORDER BY [Id])
+    AS [Guest Wizard],
+       LEAD([DepositAmount]) OVER(ORDER BY [Id])
+    AS [Guest Wizard Deposit],
+	   [DepositAmount] - LEAD([DepositAmount]) OVER(ORDER BY [Id])
+    AS [Difference]
+  FROM [WizzardDeposits]
 	) 
 	AS [DepositAmountTempTable]
