@@ -32,6 +32,8 @@ AS
 		WHERE [Name] LIKE @StartLetter + '%'
   END
 
+EXEC [dbo].[usp_GetTownsStartingWith] 'b'
+
 --Task 4
 CREATE OR ALTER PROCEDURE [usp_GetEmployeesFromTown]
 @TownName VARCHAR(50)
@@ -45,4 +47,22 @@ AS
        LEFT JOIN [Towns] AS [T]
 	          ON [T].[TownID] = [A].[TownID]
 		   WHERE [T].[Name] = @TownName
+  END
+
+EXEC [dbo].[usp_GetEmployeesFromTown] 'Sofia'
+
+--Task 5
+CREATE OR ALTER FUNCTION [dbo].[ufn_GetSalaryLevel](@salary DECIMAL(18,4))
+RETURNS VARCHAR(15)
+AS
+  BEGIN	
+       DECLARE @salaryLevel VARCHAR(15);
+         IF(@Salary < 30000)
+           SET @salaryLevel = 'Low'
+         ELSE IF(@Salary <= 50000)
+           SET @salaryLevel = 'Average'
+         ELSE 
+           SET @salaryLevel = 'High'
+
+        RETURN @salaryLevel
   END
