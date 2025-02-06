@@ -1,7 +1,7 @@
 USE [SoftUni]
 
 --Task 1
-CREATE PROCEDURE [usp_GetEmployeesSalaryAbove35000]
+CREATE OR ALTER PROCEDURE [usp_GetEmployeesSalaryAbove35000]
 AS
   BEGIN
 	   SELECT [FirstName], 
@@ -11,7 +11,7 @@ AS
   END
 
 --Task 2
-CREATE PROCEDURE [usp_GetEmployeesSalaryAboveNumber] 
+CREATE OR ALTER PROCEDURE [usp_GetEmployeesSalaryAboveNumber] 
 @Salary DECIMAL(18, 4)
 AS
   BEGIN
@@ -31,3 +31,5 @@ AS
          FROM [Towns]
 		WHERE [Name] LIKE @StartLetter + '%'
   END
+
+--Task 4
