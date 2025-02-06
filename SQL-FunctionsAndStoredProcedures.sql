@@ -20,3 +20,14 @@ AS
          FROM [Employees]
 		WHERE [Salary] >= @Salary
   END
+
+--Task 3
+CREATE OR ALTER PROCEDURE [usp_GetTownsStartingWith] 
+@StartLetter VARCHAR(50)
+AS
+  BEGIN
+       SELECT [Name]
+	       AS [Town]
+         FROM [Towns]
+		WHERE [Name] LIKE @StartLetter + '%'
+  END
