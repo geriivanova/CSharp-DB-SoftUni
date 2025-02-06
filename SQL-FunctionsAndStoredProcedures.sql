@@ -52,7 +52,7 @@ AS
 EXEC [dbo].[usp_GetEmployeesFromTown] 'Sofia'
 
 --Task 5
-CREATE OR ALTER FUNCTION [dbo].[ufn_GetSalaryLevel](@salary DECIMAL(18,4))
+CREATE OR ALTER FUNCTION [dbo].[ufn_GetSalaryLevel](@Salary DECIMAL(18,4))
 RETURNS VARCHAR(15)
 AS
   BEGIN	
@@ -65,4 +65,32 @@ AS
            SET @salaryLevel = 'High'
 
         RETURN @salaryLevel
+  END
+
+--Task 6
+CREATE OR ALTER PROCEDURE [usp_EmployeesBySalaryLevel]
+@SalaryLevel VARCHAR(15)
+AS
+  BEGIN
+       IF(@SalaryLevel = 'Low')
+	     BEGIN
+		      SELECT [FirstName],
+	                 [LastName]
+	            FROM [Employees]
+			   WHERE [Salary] < 30000
+		 END
+	   ELSE IF(@SalaryLevel = 'Average')
+	        BEGIN
+			     SELECT [FirstName],
+	                 [LastName]
+	            FROM [Employees]
+			   WHERE [Salary] BETWEEN 30000 AND 50000
+			END
+       ELSE IF(@SalaryLevel = 'High')
+	        BEGIN
+			     SELECT [FirstName],
+	                 [LastName]
+	            FROM [Employees]
+			   WHERE [Salary] > 50000
+			END
   END
