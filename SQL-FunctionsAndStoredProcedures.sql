@@ -227,3 +227,28 @@ AS
     END
 
 EXEC [usp_CalculateFutureValueForAccount] @AccountId = 1, @InterestRate = 0.1
+
+--Task 13
+USE [Diablo]
+
+CREATE OR ALTER FUNCTION [ufn_CashInUsersGames](@GameName NVARCHAR(50))
+RETURNS TABLE 
+AS
+RETURN( 
+         SELECT SUM([Cash])
+                     AS [SumCash]
+                   FROM (
+                         SELECT [G].[Name],
+                                [UG].[Cash],
+                                ROW_NUMBER() OVER(ORDER BY [UG].[Cash] DESC)
+                             AS [Row Number]
+                           FROM [Games]
+                             AS [G]
+                      LEFT JOIN [UsersGames]
+                             AS [UG]
+                             ON [UG].[GameId] = [G].[Id]
+                          WHERE [G].[Name] = @GameName
+                        )
+                     AS [UsersGamesRowNumberTempTable]
+                  WHERE [Row Number] % 2 = 1
+      )
