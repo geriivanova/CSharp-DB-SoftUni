@@ -158,4 +158,13 @@ AS
 		  WHERE [DepartmentID] = @departmentId
   END
 
-	  
+--Task 9
+USE [Bank]
+
+CREATE OR ALTER PROCEDURE [usp_GetHoldersFullName]
+AS
+  BEGIN
+       SELECT CONCAT_WS(' ', [FirstName], [LastName]) 
+	       AS [Full Name]
+	     FROM [AccountHolders]
+  END
