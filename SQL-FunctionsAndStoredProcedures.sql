@@ -188,3 +188,15 @@ AS
 		 ORDER BY [AH].[FirstName],
 		          [AH].[LastName]
   END
+
+--Task 11
+CREATE OR ALTER FUNCTION [ufn_CalculateFutureValue](@Sum DECIMAL (18, 4), @Rate FLOAT, @Years INT)
+RETURNS DECIMAL(18, 4)
+AS 
+  BEGIN 
+       DECLARE @InitialSum DECIMAL (18, 4) = @Sum;
+	   DECLARE @YearlyInterestRate FLOAT = @Rate;
+	   DECLARE @NumberOfYears INT = @Years
+
+	   RETURN (@InitialSum * POWER((1 + @YearlyInterestRate), @NumberOfYears))
+  END
