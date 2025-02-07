@@ -168,3 +168,23 @@ AS
 	       AS [Full Name]
 	     FROM [AccountHolders]
   END
+
+--Task 10
+CREATE OR ALTER PROCEDURE [usp_GetHoldersWithBalanceHigherThan] @Number MONEY
+AS
+  BEGIN
+           SELECT [AH].[FirstName]
+		       AS [First Name],
+			      [AH].[LastName]
+			   AS [Last Name]
+	         FROM [AccountHolders]
+		       AS [AH]
+	    LEFT JOIN [Accounts] 
+		       AS [A]
+			   ON [A].[AccountHolderId] = [AH].[Id]
+		 GROUP BY [AH].[FirstName],
+		          [AH].[LastName]
+		   HAVING SUM([a].[Balance]) > @Number
+		 ORDER BY [AH].[FirstName],
+		          [AH].[LastName]
+  END
