@@ -200,3 +200,30 @@ AS
 
 	   RETURN (@InitialSum * POWER((1 + @YearlyInterestRate), @NumberOfYears))
   END
+
+SELECT [dbo].[ufn_CalculateFutureValue](1000, 0.1, 5)
+
+--Task 12
+CREATE OR ALTER PROCEDURE [usp_CalculateFutureValueForAccount] 
+@AccountId INT, @InterestRate FLOAT
+AS
+  BEGIN
+           SELECT [A].[Id]
+		       AS [Account Id],
+			      [AH].[FirstName]
+			   AS [First Name],
+			      [AH].[LastName]
+			   AS [Last Name],
+			      [A].[Balance]
+			   AS [Current Balance],
+			      [dbo].[ufn_CalculateFutureValue]([A].[Balance], @InterestRate, 5)
+			   AS [Balance in 5 years]
+	         FROM [AccountHolders]
+		       AS [AH]
+		LEFT JOIN [Accounts] 
+		       AS [A]
+			   ON [AH].[Id] = [A].[AccountHolderId]
+            WHERE [A].[Id] = @AccountId
+    END
+
+EXEC [usp_CalculateFutureValueForAccount] @AccountId = 1, @InterestRate = 0.1
