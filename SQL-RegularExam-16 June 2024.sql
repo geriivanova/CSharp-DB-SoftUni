@@ -87,3 +87,27 @@ INNER JOIN [Contacts]
         AS [C]
 	    ON [C].[Id] = [A].[ContactId]
 	 WHERE [C].[Website] IS NULL
+
+--Task 4
+DELETE 
+  FROM [LibrariesBooks]
+ WHERE [BookId] IN (
+                         SELECT [B].[Id] 
+						   FROM [Books]
+						     AS [B]
+					 INNER JOIN [Authors]
+							 AS [A]
+							 ON [A].[Id] = [B].[AuthorId]
+						  WHERE [A].[Name] = 'Alex Michaelides' 
+                    )
+DELETE 
+  FROM [Books]
+ WHERE [AuthorId] IN (  
+                         SELECT [Id] 
+						   FROM [Authors]
+						  WHERE [Name] = 'Alex Michaelides'
+                     )
+
+DELETE 
+  FROM [Authors]
+ WHERE [Name] = 'Alex Michaelides'
