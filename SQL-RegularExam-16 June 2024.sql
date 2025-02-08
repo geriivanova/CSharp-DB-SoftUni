@@ -221,3 +221,19 @@ INNER JOIN [Authors]
 	 WHERE [C].[PostAddress] LIKE '%Denver%'
 	   AND [G].[Name] = 'Fiction'
   ORDER BY [B].[Title] ASC
+
+--Task 11
+CREATE FUNCTION [udf_AuthorsWithBooks] (@name NVARCHAR(100)) 
+RETURNS INT 
+AS
+  BEGIN
+       DECLARE @result INT;
+      SELECT @result = COUNT(*)
+	           FROM [Books]
+		         AS [B]
+		 INNER JOIN [Authors] 
+		         AS [A]
+				 ON [A].[Id] = [B].[AuthorId]
+			  WHERE [A].[Name] = @name
+		 RETURN @result
+  END
