@@ -122,3 +122,16 @@ DELETE
 ORDER BY [YearPublished] DESC,
          [Title] ASC
 
+--Task 6
+   SELECT [B].[Id],
+          [B].[Title],
+		  [B].[ISBN],
+		  [G].[Name]
+     FROM [Books]
+       AS [B]
+LEFT JOIN [Genres] 
+	   AS [G] 
+	   ON [B].[GenreId] = [G].[Id]
+    WHERE [G].[Name] IN ('Biography', 'Historical Fiction')
+ ORDER BY [G].[Name],
+          [B].[Title]
