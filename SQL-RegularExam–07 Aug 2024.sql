@@ -179,3 +179,26 @@ LEFT JOIN [Shoes]
    HAVING COUNT([O].[Id]) > 2
  ORDER BY [AvgPrice] DESC
 
+--Task 9
+   SELECT [S].[Model],
+          COUNT([SS].[Id])
+	   AS [CountOfSizes],
+	      [B].[Name]
+	   AS [BrandName]
+     FROM [Shoes]
+       AS [S]
+LEFT JOIN [Brands]
+       AS [B]
+       ON [B].[Id] = [S].[BrandId]
+LEFT JOIN [ShoesSizes] 
+       AS [SZ]
+	   ON [S].[Id] = [SZ].[ShoeId]
+LEFT JOIN [Sizes]
+       AS [SS]
+	   ON [SS].[Id] = [SZ].[SizeId]
+    WHERE [S].[Model] LIKE '%Run%'
+	  AND [B].[Name] = 'Nike'
+ GROUP BY [S].[Model],
+          [B].[Name]
+   HAVING COUNT([SS].[Id]) > 5
+ ORDER BY [S].[Model] DESC
