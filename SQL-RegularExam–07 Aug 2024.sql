@@ -127,3 +127,16 @@ LEFT JOIN [Shoes]
 	   ON [S].[Id] = [O].[ShoeId]
 ORDER BY [S].[Price] DESC,
          [S].[Model] ASC
+
+--Task 6
+   SELECT [B].[Name]
+       AS [BrandName],
+	      [S].[Model]
+	   AS [ShoeModel]
+     FROM [Shoes]
+       AS [S]
+LEFT JOIN [Brands]
+       AS [B]
+       ON [B].[Id] = [S].[BrandId]
+ ORDER BY [B].[Name] ASC,
+          [S].[Model] ASC
