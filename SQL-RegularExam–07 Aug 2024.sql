@@ -140,3 +140,23 @@ LEFT JOIN [Brands]
        ON [B].[Id] = [S].[BrandId]
  ORDER BY [B].[Name] ASC,
           [S].[Model] ASC
+
+--Task 7
+  SELECT 
+ TOP (10) [U].[Id]
+       AS [UserId],
+	      [U].[FullName],
+		  SUM([S].[Price])
+	   AS [TotalSpent]
+     FROM [Users] 
+       AS [U]
+LEFT JOIN [Orders]
+       AS [O]
+       ON [U].[Id] = [O].[UserId]
+LEFT JOIN [Shoes]
+       AS [S]
+	   ON [S].[Id] = [O].[ShoeId]
+ GROUP BY [U].[Id],
+          [U].[FullName]
+ ORDER BY [TotalSpent] DESC,
+          [U].[FullName] ASC
