@@ -249,3 +249,45 @@ BEGIN
 	      WHERE [U].[Email] = @email
      RETURN @result
 END
+
+SELECT [dbo].[udf_OrdersByEmail]('sstewart@example.com')
+
+--Task 12
+CREATE OR ALTER PROCEDURE [usp_SearchByShoeSize]
+@shoeSize DECIMAL(5, 2)
+AS
+BEGIN
+          SELECT [S].[Model]
+		      AS [ModelName],
+			     [U].[FullName]
+			  AS [UserFullName],
+			CASE 
+			     WHEN [S].[Price] < 100 THEN 'Low'
+				 WHEN [S].[Price] BETWEEN 100 AND 200 THEN 'Medium'
+			     WHEN [S].[Price] > 200 THEN 'High'
+		     END
+			  AS [PriceLevel],
+			     [B].[Name]
+			  AS [BrandName],
+			     [SS].[EU]
+			  AS [SizeEU]
+	        FROM [Users]
+	          AS [U]
+	   LEFT JOIN [Orders]
+	          AS [O]
+	          ON [U].[Id] = [O].[UserId]
+       LEFT JOIN [Shoes] 
+	          AS [S]
+	          ON [S].[Id] = [O].[ShoeId]
+       LEFT JOIN [Brands] 
+	          AS [B]
+	          ON [B].[Id] = [S].[BrandId]
+       LEFT JOIN [Sizes]
+	          AS [SS]
+	          ON [SS].[Id] = [O].[SizeId]
+		   WHERE [SS].[EU] = @shoeSize
+		ORDER BY [B].[Name],
+		         [U].[FullName]
+END
+
+EXEC usp_SearchByShoeSize 40.00
