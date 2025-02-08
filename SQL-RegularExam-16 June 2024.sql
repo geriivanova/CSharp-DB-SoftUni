@@ -192,3 +192,32 @@ LEFT JOIN [Contacts]
 	   ON [C].[Id] = [A].[ContactId]
 	WHERE [C].[PostAddress] LIKE '%UK%'
  ORDER BY [A].[Name] ASC
+
+--Task 10
+    SELECT [A].[Name]
+        AS [Author],
+	       [B].[Title],
+	 	   [L].[Name]
+	    AS [Library],
+	       [C].[PostAddress]
+	    AS [Library Address]
+	  FROM [Books]
+	    AS [B]
+INNER JOIN [Genres]
+        AS [G]
+		ON [B].[GenreId] = [G].[Id]
+INNER JOIN [LibrariesBooks]
+        AS [LB]
+		ON [LB].[BookId] = [B].[Id]
+INNER JOIN [Libraries]
+        AS [L]
+		ON [L].[Id] = [LB].[LibraryId]
+INNER JOIN [Contacts]
+        AS [C]
+		ON [C].[Id] = [L].[ContactId]
+INNER JOIN [Authors] 
+        AS [A]
+		ON [B].[AuthorId] = [A].[Id]
+	 WHERE [C].[PostAddress] LIKE '%Denver%'
+	   AND [G].[Name] = 'Fiction'
+  ORDER BY [B].[Title] ASC
