@@ -233,3 +233,19 @@ LEFT JOIN [Sizes]
 	   ON [SS].[Id] = [SZ].[SizeId] 
     WHERE [U].[PhoneNumber] LIKE '%345%'
  ORDER BY [S].[Model] ASC
+
+--Task 11
+CREATE OR ALTER FUNCTION [udf_OrdersByEmail](@email NVARCHAR(100))
+RETURNS INT 
+AS
+BEGIN 
+     DECLARE @result INT;
+         SELECT @result = COUNT(*)
+	       FROM [Orders]
+	         AS [O]
+	  LEFT JOIN [Users]
+	         AS [U]
+	         ON [U].[Id] = [O].[UserId]
+	      WHERE [U].[Email] = @email
+     RETURN @result
+END
