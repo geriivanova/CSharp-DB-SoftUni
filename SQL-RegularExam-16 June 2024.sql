@@ -162,3 +162,19 @@ LEFT JOIN [Contacts]
 	       [C].[Email]
   ORDER BY [L].[Name]
   
+--Task 8
+   SELECT 
+  TOP (3) [B].[Title],
+          [B].[YearPublished]
+	   AS [Year],
+	      [G].[Name] 
+	   AS [Genre]
+     FROM [Books]
+       AS [B]
+LEFT JOIN [Genres]
+       AS [G]
+	   ON [G].[Id] = [B].[GenreId]
+    WHERE ([B].[YearPublished] > 2000 AND [B].[Title] LIKE '%a%')
+	   OR ([B].[YearPublished] < 1950 AND [G].[Name] LIKE '%Fantasy%')
+ ORDER BY [B].[Title] ASC,
+          [B].[YearPublished] DESC
