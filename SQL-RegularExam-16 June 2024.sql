@@ -178,3 +178,17 @@ LEFT JOIN [Genres]
 	   OR ([B].[YearPublished] < 1950 AND [G].[Name] LIKE '%Fantasy%')
  ORDER BY [B].[Title] ASC,
           [B].[YearPublished] DESC
+
+--Task 9
+   SELECT [A].[Name]
+       AS [Author],
+	      [C].[Email],
+		  [C].[PostAddress]
+	   AS [Address]
+     FROM [Authors]
+       AS [A]
+LEFT JOIN [Contacts]
+       AS [C]
+	   ON [C].[Id] = [A].[ContactId]
+	WHERE [C].[PostAddress] LIKE '%UK%'
+ ORDER BY [A].[Name] ASC
