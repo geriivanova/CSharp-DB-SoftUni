@@ -160,3 +160,22 @@ LEFT JOIN [Shoes]
           [U].[FullName]
  ORDER BY [TotalSpent] DESC,
           [U].[FullName] ASC
+
+--Task 8
+   SELECT [U].[Username],
+	      [U].[Email],
+		  CAST(AVG([S].[Price]) AS DECIMAL(10,2))
+	   AS [AvgPrice]
+     FROM [Users] 
+       AS [U]
+LEFT JOIN [Orders]
+       AS [O]
+       ON [U].[Id] = [O].[UserId]
+LEFT JOIN [Shoes]
+       AS [S]
+	   ON [S].[Id] = [O].[ShoeId]
+ GROUP BY [U].[Username],
+	      [U].[Email]
+   HAVING COUNT([O].[Id]) > 2
+ ORDER BY [AvgPrice] DESC
+
