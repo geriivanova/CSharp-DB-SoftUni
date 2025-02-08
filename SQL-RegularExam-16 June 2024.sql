@@ -135,3 +135,30 @@ LEFT JOIN [Genres]
     WHERE [G].[Name] IN ('Biography', 'Historical Fiction')
  ORDER BY [G].[Name],
           [B].[Title]
+
+--Task 7
+    SELECT [L].[Name]
+        AS [Library],
+	       [C].[Email]
+      FROM [Libraries]
+       AS [L]
+LEFT JOIN [Contacts]
+       AS [C]
+       ON [L].[ContactId] = [C].[Id] 
+    WHERE [L].[Id] NOT IN (
+                            SELECT [LB].[LibraryId]
+                              FROM [LibrariesBooks]
+                                AS [LB]
+                         LEFT JOIN [Books]
+                                AS [B]
+                                ON [LB].[BookId] = [B].[Id]
+                             WHERE [B].[GenreId] IN (
+                                                     SELECT [Id]
+                                                       FROM [Genres]
+                                                      WHERE [Name] = 'Mystery'
+                                                    )
+                          )
+  GROUP BY [L].[Name],
+	       [C].[Email]
+  ORDER BY [L].[Name]
+  
