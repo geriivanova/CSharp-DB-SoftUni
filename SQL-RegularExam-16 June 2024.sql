@@ -237,3 +237,27 @@ AS
 			  WHERE [A].[Name] = @name
 		 RETURN @result
   END
+
+--Task 12
+CREATE PROCEDURE [usp_SearchByGenre](@genreName NVARCHAR(30))
+AS
+  BEGIN
+             SELECT [B].[Title],
+			        [B].[YearPublished] 
+				 AS [Year],
+				    [B].[ISBN],
+					[A].[Name]
+				 AS [Author],
+				    [G].[Name]
+				 AS [Genre]
+	           FROM [Books]
+		         AS [B]
+		 INNER JOIN [Genres]
+		         AS [G]
+				 ON [G].[Id] = [B].[GenreId]
+         INNER JOIN [Authors]
+		         AS [A]
+				 ON [A].[Id] = [B].[AuthorId]
+			  WHERE [G].[Name] = @genreName
+		   ORDER BY [B].[Title] ASC
+  END
