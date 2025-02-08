@@ -261,3 +261,35 @@ AS
 			  WHERE [G].[Name] = @genreName
 		   ORDER BY [B].[Title] ASC
   END
+
+--Task 13
+CREATE OR ALTER FUNCTION [udf_GenreFilter](@genre NVARCHAR(30)) 
+RETURNS TABLE
+AS 
+RETURN 
+(
+            SELECT [B].[Id]
+                AS [BookId],
+                   [B].[Title],
+                   [B].[YearPublished],
+                   [B].[ISBN],
+                   [A].[Name]
+                AS [Author],
+                   [L].[Name]
+                AS [Library]
+              FROM [Books] 
+                AS [B]
+        INNER JOIN [Genres]
+                AS [G]
+                ON [B].[GenreId] = [G].[Id]
+        INNER JOIN [Authors]
+                AS [A]
+                ON [B].[AuthorId] = [A].[Id]
+        INNER JOIN [LibrariesBooks]
+                AS [LB]
+                ON [B].[Id] = [LB].[BookId]
+        INNER JOIN [Libraries]
+                AS [L]
+                ON [LB].[LibraryId] = [L].[Id]
+             WHERE [G].[Name] = @genre
+)
