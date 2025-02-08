@@ -202,3 +202,34 @@ LEFT JOIN [Sizes]
           [B].[Name]
    HAVING COUNT([SS].[Id]) > 5
  ORDER BY [S].[Model] DESC
+
+--Task 10
+   SELECT [U].[FullName],
+          [U].[PhoneNumber],
+		  [S].[Price]
+	   AS [OrderPrice],
+	      [S].[Id]
+	   AS [ShoeId],
+	      [B].[Id]
+	   AS [BrandId],
+	      CONCAT_WS('/', CONCAT([SS].[EU], 'EU'), CONCAT([SS].[US], 'US'), CONCAT([SS].[UK], 'UK'))
+       AS [ShoeSize]
+     FROM [Users]
+       AS [U]
+LEFT JOIN [Orders]
+       AS [O]
+	   ON [O].[UserId] = [U].[Id]
+LEFT JOIN [Shoes]
+       AS [S]
+	   ON [S].[Id] = [O].[ShoeId]
+LEFT JOIN [Brands] 
+       AS [B]
+	   ON [B].[Id] = [S].[BrandId]
+LEFT JOIN [ShoesSizes] 
+       AS [SZ]
+	   ON [SZ].[ShoeId] = [S].[Id] AND [SZ].[SizeId] = [O].[SizeId] 
+LEFT JOIN [Sizes]
+       AS [SS]
+	   ON [SS].[Id] = [SZ].[SizeId] 
+    WHERE [U].[PhoneNumber] LIKE '%345%'
+ ORDER BY [S].[Model] ASC
