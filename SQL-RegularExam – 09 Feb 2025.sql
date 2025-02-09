@@ -243,3 +243,21 @@ RETURNS TABLE AS
 		AS [RankingTempTable]
 			WHERE [RANKS] = '1'
          )
+--Task 12
+CREATE PROCEDURE [usp_SearchTeamsByCity]
+@City NVARCHAR(50)
+AS
+BEGIN
+    SELECT [T].[Name] 
+		AS [TeamName],
+           [L].[Name] 
+		AS [LeagueName],
+           [T].[City]
+      FROM [Teams] 
+	    AS [T]
+      JOIN [Leagues] 
+	    AS [L] 
+	    ON [T].[LeagueId] = [L].[Id]
+    WHERE [T].[City] = @City
+    ORDER BY [T].[Name] ASC;
+END
