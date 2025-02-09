@@ -130,10 +130,7 @@ DELETE
 	     [HomeTeamGoals] + [AwayTeamGoals]
       AS [TotalGoals]
     FROM [Matches]
-GROUP BY [MatchDate],
-	     [HomeTeamGoals],
-	     [AwayTeamGoals]
-  HAVING [HomeTeamGoals] + [AwayTeamGoals] >= 5
+   WHERE [HomeTeamGoals] + [AwayTeamGoals] >= 5
 ORDER BY [TotalGoals] DESC,
          [MatchDate] ASC
 
