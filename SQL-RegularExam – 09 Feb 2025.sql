@@ -208,3 +208,16 @@ INNER JOIN [Matches]
     HAVING COALESCE(SUM([M].[AwayTeamGoals]), 0) >= 6
   ORDER BY [TotalAwayGoals] DESC, 
            [T].[Name] ASC;
+
+--Task 10
+    SELECT [L].[Name] 
+        AS [LeagueName],
+           ROUND(CAST(SUM([M].[HomeTeamGoals] + [M].[AwayTeamGoals]) AS FLOAT) / COUNT([M].[Id]), 2) 
+	    AS [AvgScoringRate]
+      FROM [Leagues] 
+	    AS [L]
+INNER JOIN [Matches] 
+        AS [M] 
+		ON [M].[LeagueId] = [L].[Id]
+  GROUP BY [L].[Name]
+  ORDER BY [AvgScoringRate] DESC
