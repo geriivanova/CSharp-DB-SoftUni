@@ -81,25 +81,23 @@ INSERT INTO [Matches]([HomeTeamId], [AwayTeamId],
      VALUES (98, 97, '2024-11-02 20:45:00', 3, 2, 6)
 
 --Task 3
-UPDATE [PlayerStats]
-   SET [Goals] += 1
- WHERE [PlayerId] IN (
-						 SELECT [PL].[PlayerId]
-						   FROM [Players]
-						     AS [P]
-					  LEFT JOIN [PlayersTeams]
-					         AS [PL]
-							 ON [P].[Id] = [PL].[PlayerId]
-						  WHERE [PL].[TeamId] IN (
-						                       SELECT [L].[Id]  
-											     FROM [Teams]
-												   AS [T]
-											LEFT JOIN [Leagues]
-												   AS [L]
-												   ON [T].[LeagueId] = [L].[Id]
-											    WHERE [L].[Name] = 'La Liga'
-						                   )
-                     )
+    UPDATE [PS]
+       SET [PS].[Goals] +=  1
+      FROM [PlayerStats]
+	    AS [PS]
+INNER JOIN [Players] 
+        AS [P] 
+		ON [PS].[PlayerId] = [P].[Id]
+INNER JOIN [PlayersTeams]
+        AS [PT] 
+		ON [P].[Id] = [PT].[PlayerId]
+INNER JOIN [Teams] 
+        AS [T] 
+		ON [PT].[TeamId] = [T].[Id]
+INNER JOIN [Leagues] 
+        AS [L] ON [T].[LeagueId] = [L].[Id]
+     WHERE [P].[Position] = 'Forward' 
+	   AND [L].[Name] = 'La Liga'
  
 --Task 4
 DELETE 
@@ -221,3 +219,53 @@ INNER JOIN [Matches]
 		ON [M].[LeagueId] = [L].[Id]
   GROUP BY [L].[Name]
   ORDER BY [AvgScoringRate] DESC
+
+--Task 11
+CREATE OR ALTER FUNCTION [udf_LeagueTopScorer] (@LeagueName NVARCHAR(50))
+RETURNS TABLE
+AS
+RETURN (
+        SELECT [P].[Name] 
+	        AS [PlayerName], 
+			   SUM([PS].[Goals]) 
+		    AS [TotalGoals]
+          FROM [Players] 
+		    AS [P]
+    INNER JOIN [PlayerStats] 
+	        AS [PS] 
+			ON [P].[Id] = [PS].[PlayerId]
+    INNER JOIN [PlayersTeams] 
+	        AS [PT] 
+			ON [P].[Id] = [PT].[PlayerId]
+    INNER JOIN [Teams] 
+	        AS [T] 
+			ON [PT].[TeamId] = [T].[Id]
+    INNER JOIN [Leagues] 
+	        AS [L] 
+			ON [T].[LeagueId] = [L].[Id]
+    WHERE [L].[Name] = @LeagueName
+    GROUP BY [P].[Name]
+    HAVING SUM([PS].[Goals]) = (
+        SELECT MAX([TotalGoals])
+        FROM (
+             SELECT SUM([PS].[Goals]) 
+			        AS [TotalGoals]
+                  FROM [Players] 
+				    AS [P]
+            INNER JOIN [PlayerStats] 
+			        AS [PS]
+					ON [P].[Id] = [PS].[PlayerId]
+            INNER JOIN [PlayersTeams] 
+			        AS [PT] 
+					ON [P].[Id] = [PT].[PlayerId]
+            INNER JOIN [Teams] 
+			        AS [T] 
+					ON [PT].[TeamId] = [T].[Id]
+            INNER JOIN [Leagues] 
+			        AS [L] 
+					ON [T].[LeagueId] = [L].[Id]
+                 WHERE [L].[Name] = @LeagueName
+              GROUP BY [P].[Name]
+        ) AS [GoalStats]
+    )
+)
