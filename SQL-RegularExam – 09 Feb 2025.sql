@@ -152,3 +152,18 @@ LEFT JOIN [Teams]
        ON [T].[Id] = [PT].[TeamId]
     WHERE [P].[Name] LIKE '%Aaron%'
  ORDER BY [P].[Name]
+
+--Task 7
+   SELECT [P].[Id],
+          [P].[Name],
+		  [P].[Position]
+     FROM [Players]
+       AS [P]
+LEFT JOIN [PlayersTeams]
+       AS [PT]
+       ON [P].[Id] = [PT].[PlayerId]
+LEFT JOIN [Teams] 
+       AS [T]
+	   ON [T].[Id] = [PT].[TeamId]
+    WHERE [T].[City] = 'London'
+ ORDER BY [P].[Name] ASC
