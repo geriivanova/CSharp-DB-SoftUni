@@ -101,3 +101,25 @@ UPDATE [PlayerStats]
 						                   )
                      )
  
+--Task 4
+DELETE 
+  FROM [PlayersTeams]
+ WHERE [TeamId] IN (
+                       SELECT [T].[Id]
+						 FROM [Teams]
+						   AS [T]
+					LEFT JOIN [Leagues]
+						   AS [L]
+						   ON [L].[Id] = [T].[LeagueId]
+						WHERE [L].[Name] = 'Eredivisie'
+                   )
+DELETE
+  FROM [Teams]
+ WHERE [LeagueId] IN (
+                       SELECT [Id]
+						 FROM [Leagues]
+						WHERE [Name] = 'Eredivisie'
+                     )
+DELETE 
+  FROM [Players]
+ WHERE [Name] IN ('Luuk de Jong', 'Josip Sutalo')
