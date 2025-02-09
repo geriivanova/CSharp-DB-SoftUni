@@ -221,51 +221,28 @@ INNER JOIN [Matches]
   ORDER BY [AvgScoringRate] DESC
 
 --Task 11
-CREATE OR ALTER FUNCTION [udf_LeagueTopScorer] (@LeagueName NVARCHAR(50))
-RETURNS TABLE
-AS
-RETURN (
-        SELECT [P].[Name] 
-	        AS [PlayerName], 
-			   SUM([PS].[Goals]) 
-		    AS [TotalGoals]
-          FROM [Players] 
-		    AS [P]
-    INNER JOIN [PlayerStats] 
-	        AS [PS] 
+CREATE FUNCTION [dbo].[udf_LeagueTopScorer](@nameLeague NVARCHAR(50))
+RETURNS TABLE AS
+ RETURN (
+			
+			SELECT [PlayerName],
+			       [TotalGoals]
+			  FROM  (SELECT 
+			       [P].[Name] AS [PlayerName],
+			       [PS].[Goals] AS [TotalGoals],
+			DENSE_RANK() OVER(PARTITION BY [L].[Id] ORDER BY [PS].[Goals] DESC)
+            AS [RANKS]
+			FROM [Players] AS [P]
+			INNER JOIN [PlayerStats] AS [PS]
 			ON [P].[Id] = [PS].[PlayerId]
-    INNER JOIN [PlayersTeams] 
-	        AS [PT] 
+			INNER JOIN [PlayersTeams] AS [PT]
 			ON [P].[Id] = [PT].[PlayerId]
-    INNER JOIN [Teams] 
-	        AS [T] 
+			INNER JOIN [Teams] AS [T]
 			ON [PT].[TeamId] = [T].[Id]
-    INNER JOIN [Leagues] 
-	        AS [L] 
-			ON [T].[LeagueId] = [L].[Id]
-    WHERE [L].[Name] = @LeagueName
-    GROUP BY [P].[Name]
-    HAVING SUM([PS].[Goals]) = (
-        SELECT MAX([TotalGoals])
-        FROM (
-             SELECT SUM([PS].[Goals]) 
-			        AS [TotalGoals]
-                  FROM [Players] 
-				    AS [P]
-            INNER JOIN [PlayerStats] 
-			        AS [PS]
-					ON [P].[Id] = [PS].[PlayerId]
-            INNER JOIN [PlayersTeams] 
-			        AS [PT] 
-					ON [P].[Id] = [PT].[PlayerId]
-            INNER JOIN [Teams] 
-			        AS [T] 
-					ON [PT].[TeamId] = [T].[Id]
-            INNER JOIN [Leagues] 
-			        AS [L] 
-					ON [T].[LeagueId] = [L].[Id]
-                 WHERE [L].[Name] = @LeagueName
-              GROUP BY [P].[Name]
-        ) AS [GoalStats]
-    )
-)
+			INNER JOIN [Leagues] AS [L]
+			ON [L].[Id] = [T].[LeagueId]
+			WHERE [L].[Name] = @nameLeague
+			)
+		AS [RankingTempTable]
+			WHERE [RANKS] = '1'
+         )
