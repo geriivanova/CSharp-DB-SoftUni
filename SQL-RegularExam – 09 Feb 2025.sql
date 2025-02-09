@@ -123,3 +123,18 @@ DELETE
 DELETE 
   FROM [Players]
  WHERE [Name] IN ('Luuk de Jong', 'Josip Sutalo')
+
+--Task 5
+  SELECT FORMAT([MatchDate], 'yyyy-MM-dd')
+      AS [MatchDate],
+	     [HomeTeamGoals],
+	     [AwayTeamGoals],
+	     [HomeTeamGoals] + [AwayTeamGoals]
+      AS [TotalGoals]
+    FROM [Matches]
+GROUP BY [MatchDate],
+	     [HomeTeamGoals],
+	     [AwayTeamGoals]
+  HAVING [HomeTeamGoals] + [AwayTeamGoals] >= 5
+ORDER BY [TotalGoals] DESC,
+         [MatchDate] ASC
