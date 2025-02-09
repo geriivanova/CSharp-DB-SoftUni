@@ -138,3 +138,17 @@ GROUP BY [MatchDate],
   HAVING [HomeTeamGoals] + [AwayTeamGoals] >= 5
 ORDER BY [TotalGoals] DESC,
          [MatchDate] ASC
+
+--Task 6
+   SELECT [P].[Name],
+          [T].[City]
+     FROM [Players]
+       AS [P]
+LEFT JOIN [PlayersTeams]
+       AS [PT]
+       ON [P].[Id] = [PT].[PlayerId]
+LEFT JOIN [Teams] 
+       AS [T]
+       ON [T].[Id] = [PT].[TeamId]
+    WHERE [P].[Name] LIKE '%Aaron%'
+ ORDER BY [P].[Name]
