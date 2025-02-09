@@ -167,3 +167,29 @@ LEFT JOIN [Teams]
 	   ON [T].[Id] = [PT].[TeamId]
     WHERE [T].[City] = 'London'
  ORDER BY [P].[Name] ASC
+
+--Task 8
+ SELECT 
+ TOP (10) [T1].[Name]
+       AS [HomeTeamName],
+	      [T2].[Name] 
+       AS [AwayTeamName],
+	      [L].[Name]
+	   AS [LeagueName],
+	      FORMAT([MatchDate], 'yyyy-MM-dd')
+       AS [MatchDate]
+     FROM [Matches]
+       AS [M]
+INNER JOIN [Teams]
+       AS [T1]
+	   ON [T1].[Id] = [M].[HomeTeamId]
+INNER JOIN [Teams]
+       AS [T2]
+	   ON [T2].[Id] = [M].[AwayTeamId]
+INNER JOIN [Leagues]
+        AS [L]
+		ON [L].[Id] = [T1].[LeagueId]
+    WHERE [M].[MatchDate] BETWEEN '2024-09-01' AND '2024-09-15'
+      AND [L].[Id] % 2  = 0
+ ORDER BY [M].[MatchDate] ASC,
+          [HomeTeamName] ASC
