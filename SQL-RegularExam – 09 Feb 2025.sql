@@ -193,3 +193,18 @@ INNER JOIN [Leagues]
       AND [L].[Id] % 2  = 0
  ORDER BY [M].[MatchDate] ASC,
           [HomeTeamName] ASC
+
+--Task 9
+    SELECT [M].[AwayTeamId] AS [Id],
+           [T].[Name],
+           COALESCE(SUM(M.AwayTeamGoals), 0) AS TotalAwayGoals
+      FROM [Teams] 
+	    AS [T]
+INNER JOIN [Matches]
+        AS [M] 
+		ON [M].[AwayTeamId] = [T].[Id]
+  GROUP BY [M].[AwayTeamId],
+           [T].[Name]
+    HAVING COALESCE(SUM([M].[AwayTeamGoals]), 0) >= 6
+  ORDER BY [TotalAwayGoals] DESC, 
+           [T].[Name] ASC;
