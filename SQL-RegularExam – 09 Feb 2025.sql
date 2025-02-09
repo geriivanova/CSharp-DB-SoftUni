@@ -100,27 +100,66 @@ INNER JOIN [Leagues]
 	   AND [L].[Name] = 'La Liga'
  
 --Task 4
-DELETE 
-  FROM [PlayersTeams]
- WHERE [TeamId] IN (
-                       SELECT [T].[Id]
-						 FROM [Teams]
-						   AS [T]
-					LEFT JOIN [Leagues]
-						   AS [L]
-						   ON [L].[Id] = [T].[LeagueId]
-						WHERE [L].[Name] = 'Eredivisie'
-                   )
-DELETE
-  FROM [Teams]
- WHERE [LeagueId] IN (
-                       SELECT [Id]
-						 FROM [Leagues]
-						WHERE [Name] = 'Eredivisie'
-                     )
-DELETE 
-  FROM [Players]
- WHERE [Name] IN ('Luuk de Jong', 'Josip Sutalo')
+DELETE [PS]
+  FROM [PlayerStats] 
+    AS [PS]
+ WHERE [PS].[PlayerId] IN (
+                            SELECT [P].[Id]
+                              FROM [Players] 
+							    AS [P]
+                        INNER JOIN [PlayersTeams] 
+						        AS [PT] 
+								ON [PT].[PlayerId] = [P].[Id]
+                        INNER JOIN [Teams] 
+						        AS [T] 
+								ON [PT].[TeamId] = [T].[Id]
+                        INNER JOIN [Leagues] 
+						        AS [L] 
+								ON [T].[LeagueId] = [L].[Id]
+                             WHERE [L].[Name] = 'Eredivisie' 
+	                           AND [P].[Name] IN ('Luuk de Jong', 'Josip Sutalo')
+)
+
+DELETE [PT]
+  FROM [PlayersTeams] 
+    AS [PT]
+ WHERE [PT].[PlayerId] IN (
+                            SELECT [P].[Id]
+                              FROM [Players] 
+							    AS [P]
+                        INNER JOIN [PlayersTeams] 
+						        AS [PT]  
+								ON [PT].[PlayerId] = [P].[Id]
+                        INNER JOIN [Teams]
+						        AS [T]
+								ON [PT].[TeamId] = [T].[Id]
+                        INNER JOIN [Leagues] 
+						        AS [L] 
+								ON [T].[LeagueId] = [L].[Id]
+                             WHERE [L].[Name] = 'Eredivisie'
+							   AND [P].[Name] IN ('Luuk de Jong', 'Josip Sutalo')
+)
+
+DELETE [P]
+  FROM [Players] 
+    AS [P]
+ WHERE [P].[Name] IN ('Luuk de Jong', 'Josip Sutalo')
+   AND [P].[Id] IN (
+                        SELECT [P].[Id]
+                          FROM [Players]
+						    AS [P]
+                    INNER JOIN [PlayersTeams]
+					        AS [PT] 
+							ON [PT].[PlayerId] = [P].[Id]
+                    INNER JOIN [Teams] 
+					        AS [T] 
+							ON [PT].[TeamId] = [T].[Id]
+                    INNER JOIN [Leagues] 
+					        AS [L]
+							ON [T].[LeagueId] = [L].[Id]
+                         WHERE [L].[Name] = 'Eredivisie' 
+						   AND [P].[Name] IN ('Luuk de Jong', 'Josip Sutalo')
+)
 
 --Task 5
   SELECT FORMAT([MatchDate], 'yyyy-MM-dd')
