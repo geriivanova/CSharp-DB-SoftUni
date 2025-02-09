@@ -52,7 +52,7 @@ CREATE TABLE [Matches](
 	[LeagueId] INT FOREIGN KEY REFERENCES [Leagues]([Id]) NOT NULL
 )
 
-----Task 2
+--Task 2
 INSERT INTO [Leagues] ([Name])
      VALUES ('Eredivisie')
 
@@ -79,3 +79,25 @@ INSERT INTO [PlayersTeams]([PlayerId], [TeamId])
 INSERT INTO [Matches]([HomeTeamId], [AwayTeamId], 
 [MatchDate], [HomeTeamGoals], [AwayTeamGoals], [LeagueId])
      VALUES (98, 97, '2024-11-02 20:45:00', 3, 2, 6)
+
+--Task 3
+UPDATE [PlayerStats]
+   SET [Goals] += 1
+ WHERE [PlayerId] IN (
+						 SELECT [PL].[PlayerId]
+						   FROM [Players]
+						     AS [P]
+					  LEFT JOIN [PlayersTeams]
+					         AS [PL]
+							 ON [P].[Id] = [PL].[PlayerId]
+						  WHERE [PL].[TeamId] IN (
+						                       SELECT [L].[Id]  
+											     FROM [Teams]
+												   AS [T]
+											LEFT JOIN [Leagues]
+												   AS [L]
+												   ON [T].[LeagueId] = [L].[Id]
+											    WHERE [L].[Name] = 'La Liga'
+						                   )
+                     )
+ 
